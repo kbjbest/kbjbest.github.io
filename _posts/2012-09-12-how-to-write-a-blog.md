@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Welcome to Jekyll!"
 ---
 
@@ -7,4 +6,4 @@ title:  "Welcome to Jekyll!"
 
 **Hello world**, this is my first Jekyll blog post.
 
-I hope you like it!
+I hope you like it! 한글테스트
