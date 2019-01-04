@@ -109,7 +109,7 @@ author:
   location         : "경기도 구리시"
   email            :
   links:
-    - label: "E-MAIL"
+    - label: "e-mail"
       icon: "fas fa-fw fa-envelope-square"
       url: "mailto:kbj7748@naver.com"
     - label: "Website"
@@ -131,7 +131,7 @@ author:
 # Site Footer
 footer:
   links:
-    - label: "E-MAIL"
+    - label: "e-mail"
       icon: "fas fa-fw fa-envelope-square"
       url: "mailto:kbj7748@naver.com"
     - label: "Twitter"
