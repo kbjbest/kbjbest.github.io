@@ -1,13 +1,13 @@
 ---
-title: "글샘플"
-strapline: "샘플"
-description: "블로그 글 작성 소스 샘플"
+title: "블로그 포스팅 소스 작성 요령"
+strapline: "포스팅"
+description: "블로그 포스팅 소스 작성 요령"
 header:
  overlay_image: /assets/images/source-code.jpg
 categories:
 tag:
 toc: true
-last_modified_at: 2019-01-08
+last_modified_at: 2019-01-09
 comments: true
 mathjax: true
 ---
@@ -21,6 +21,7 @@ mathjax: true
 - abc : 목록
 <br/>
 ![ABC](/assets/images/abc.png) : 이미지 삽입
+<br/>
 __________________________________________________________________ : 경계선
 
 codeblock 예시
