@@ -5,7 +5,9 @@ description: "블로그 포스팅 소스 작성 요령"
 header:
  overlay_image: /assets/images/source-code.jpg
 categories:
+  - "Blogging"
 tag:
+  - "markdown"
 toc: true
 last_modified_at: 2019-01-09
 comments: true
