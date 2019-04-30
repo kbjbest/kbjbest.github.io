@@ -1,4 +1,99 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-25T10:03:55+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Beomju’s Blog</title><subtitle>개인 블로그입니다.</subtitle><author><name>김범주</name></author><entry><title type="html">JAVA Thread 사용하기</title><link href="http://localhost:4000/java/Thread.dumpStack()/" rel="alternate" type="text/html" title="JAVA Thread 사용하기" /><published>2019-02-22T00:00:00+09:00</published><updated>2019-02-22T00:00:00+09:00</updated><id>http://localhost:4000/java/Thread.dumpStack()</id><content type="html" xml:base="http://localhost:4000/java/Thread.dumpStack()/">&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ThreadTest&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-30T10:13:25+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Beomju’s Blog</title><subtitle>개인 블로그입니다.</subtitle><author><name>김범주</name></author><entry><title type="html">synchronized</title><link href="http://localhost:4000/java/synchronized/" rel="alternate" type="text/html" title="synchronized" /><published>2019-04-16T00:00:00+09:00</published><updated>2019-04-16T00:00:00+09:00</updated><id>http://localhost:4000/java/synchronized</id><content type="html" xml:base="http://localhost:4000/java/synchronized/">&lt;h2 id=&quot;synchronized-기본-개념&quot;&gt;synchronized 기본 개념&lt;/h2&gt;
+&lt;p&gt;둘 이상의 쓰레드가 공동의 자원(파일이나 메모리 블록)을 공유하는 경우, 순서를 잘 맞추어 다른 쓰레드가 자원을 사용하고 있는 동안 한 쓰레드가 절대 자원을 변경할 수 없도록 해야 한다.
+한 쓰레드가 파일에서 레코드를 수정하는데, 다른 쓰레드가 동시에 같은 레코드를 수정하면 심각한 문제가 발생할 수 있다. 이런 상황을 처리할 수 있는 한 방법은 관련된 쓰레드에 대한 동기화(synchronization)를 이용하는 것이다.&lt;/p&gt;
+
+&lt;p&gt;동기화의 목적은 여러 개의 쓰레드가 하나의 자원에 접근하려 할 대 주어진 순간에는 오직 하나의 쓰레드만이 접근 가능하도록 하는 것이다. 동기화를 이용해 쓰레드의 실행을 관리할 수 있는 방법은 두 가지가 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;코드를 메소드 수준에서 관리할 수 있다. - 동기화 메소드&lt;/li&gt;
+  &lt;li&gt;코드를 블록 수준에서 관리할 수 있다. - 동기화 블록&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;동기화 메소드와 동기화 블록은 모두 synchronized를 이용하여서 구현된다. synchronized는 어떤 객체에서도 특정 문장 블록에 대해 lock설정을 할 수 있다. 사용방법은 아래와 같다.&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;statement&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;	 &lt;span class=&quot;c1&quot;&gt;// theObject가 동기화된다.&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;statement&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;	 &lt;span class=&quot;c1&quot;&gt;// theOjbect가 동기화된다.&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;statement문장이 실행되는 동안 theObject는 동기화된 다른 쓰레드에서 사용할 수 
+없다. 동기화된 다른 쓰레드라는 것은 위의 코드와 동일하게 synchronized를 
+사용하였거나 synchronized method를 사용한 쓰레드를 의미한다. synchronized 
+method의 예제는 아래와 같다.&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;theObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+	&lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+		&lt;span class=&quot;n&quot;&gt;statement&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; 
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;synchronized-block-vs-synchronized-method&quot;&gt;synchronized block VS synchronized method&lt;/h2&gt;
+&lt;p&gt;synnchronized method가 synchronized block보다 나은 특별한 장점은 없다.
+굳이 하나를 뽑자면 this라는 오브젝트 레퍼런스를 포함시킬 필요가 없다는건데 이것도 그렇게 큰 장점이라고는 볼 수 없다.&lt;/p&gt;
+
+&lt;p&gt;method&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//block이었으면 this를 넣어야 함&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;block&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// this를 넣음&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;synchronized block이 synchronized method보다 많은면에서 유연하다.
+왜냐하면 synchronized method는 메소드 전체의 lock을 걸지만 block은 다른객체를 사용하여 특정 부분에 lock을 걸 수 있기 때문이다.&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//객체 전체를 잠금&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;someInputRelatedWork&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;someOutputRelatedWork&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Vs.&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 특정 부분만 잠금&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputLock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outputLock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;someInputRelatedWork&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;synchronize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputLock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;someOutputRelatedWork&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;synchronize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outputLock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;또 synchronized block을 사용하게 되면 밑의 코드처럼 메소드 내에서 필요한 부분만 lock을 걸 수 있다.&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;코드&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;코드&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;코드&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;코드&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;코드&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;코드&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;코드&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;코드&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;출처: https://hashcode.co.kr [Hashcode]&lt;/p&gt;</content><author><name>김범주</name></author><category term="synchronized" /><summary type="html">synchronized 기본 개념 둘 이상의 쓰레드가 공동의 자원(파일이나 메모리 블록)을 공유하는 경우, 순서를 잘 맞추어 다른 쓰레드가 자원을 사용하고 있는 동안 한 쓰레드가 절대 자원을 변경할 수 없도록 해야 한다. 한 쓰레드가 파일에서 레코드를 수정하는데, 다른 쓰레드가 동시에 같은 레코드를 수정하면 심각한 문제가 발생할 수 있다. 이런 상황을 처리할 수 있는 한 방법은 관련된 쓰레드에 대한 동기화(synchronization)를 이용하는 것이다.</summary></entry><entry><title type="html">JAVA Thread 사용하기</title><link href="http://localhost:4000/java/Thread.dumpStack()/" rel="alternate" type="text/html" title="JAVA Thread 사용하기" /><published>2019-02-22T00:00:00+09:00</published><updated>2019-02-22T00:00:00+09:00</updated><id>http://localhost:4000/java/Thread.dumpStack()</id><content type="html" xml:base="http://localhost:4000/java/Thread.dumpStack()/">&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ThreadTest&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 
  &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
@@ -55,7 +150,29 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;출처: https://javafactory.tistory.com/1365 [FreeLife의 저장소]&lt;/p&gt;</content><author><name>김범주</name></author><category term="Thread" /><category term="run()" /><category term="start()" /><summary type="html">~~~java public class ThreadTest implements Runnable {</summary></entry><entry><title type="html">[HTML] 알면 유용하거나 자세히 몰랐던 HTML 소스</title><link href="http://localhost:4000/html/html-tag/" rel="alternate" type="text/html" title="[HTML] 알면 유용하거나 자세히 몰랐던 HTML 소스" /><published>2019-01-08T00:00:00+09:00</published><updated>2019-01-08T00:00:00+09:00</updated><id>http://localhost:4000/html/html-tag</id><content type="html" xml:base="http://localhost:4000/html/html-tag/">&lt;h1 id=&quot;html-tag--learning-the-html-source&quot;&gt;HTML TAG : Learning the HTML Source&lt;/h1&gt;
+&lt;p&gt;출처: https://javafactory.tistory.com/1365 [FreeLife의 저장소]&lt;/p&gt;</content><author><name>김범주</name></author><category term="Thread" /><category term="run()" /><category term="start()" /><summary type="html">~~~java public class ThreadTest implements Runnable {</summary></entry><entry><title type="html">블로그 포스팅 소스 작성 요령</title><link href="http://localhost:4000/blogging/sample-source/" rel="alternate" type="text/html" title="블로그 포스팅 소스 작성 요령" /><published>2019-01-08T00:00:00+09:00</published><updated>2019-01-09T00:00:00+09:00</updated><id>http://localhost:4000/blogging/sample-source</id><content type="html" xml:base="http://localhost:4000/blogging/sample-source/">&lt;h1 id=&quot;abc--대제목&quot;&gt;abc : 대제목&lt;/h1&gt;
+&lt;h2 id=&quot;abc--중제목&quot;&gt;abc : 중제목&lt;/h2&gt;
+&lt;h3 id=&quot;abc--소제목&quot;&gt;abc : 소제목&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;abc : 굵게&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;abc&lt;/li&gt;
+  &lt;li&gt;def : 넘버링
+    &lt;ul&gt;
+      &lt;li&gt;abc : 목록
+&lt;br /&gt;
+&lt;img src=&quot;/assets/images/abc.png&quot; alt=&quot;ABC&quot; /&gt; : 이미지 삽입
+&lt;br /&gt;
+&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt; : 경계선&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;codeblock 예시&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;syntaxHighlight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello World'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>김범주</name></author><category term="markdown" /><summary type="html">abc : 대제목 abc : 중제목 abc : 소제목 abc : 굵게 abc def : 넘버링 abc : 목록 : 이미지 삽입 ______________________ : 경계선</summary></entry><entry><title type="html">[HTML] 알면 유용하거나 자세히 몰랐던 HTML 소스</title><link href="http://localhost:4000/html/html-tag/" rel="alternate" type="text/html" title="[HTML] 알면 유용하거나 자세히 몰랐던 HTML 소스" /><published>2019-01-08T00:00:00+09:00</published><updated>2019-01-08T00:00:00+09:00</updated><id>http://localhost:4000/html/html-tag</id><content type="html" xml:base="http://localhost:4000/html/html-tag/">&lt;h1 id=&quot;html-tag--learning-the-html-source&quot;&gt;HTML TAG : Learning the HTML Source&lt;/h1&gt;
 &lt;p&gt;내가 작업하면서 알게 된 것이나 유용한 HTML 관련 소스들을 정리하는 목적에 블로깅이며 계속 업데이트 할 것이다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;1. &amp;lt;intut type=”text” required&amp;gt;&lt;/strong&gt;
@@ -87,29 +204,7 @@ checked=’checked’ 대신 checked만 써도 되지만, 표준 문법에 맞�
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;TYPE=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'radio'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'r3'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'group1'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'lemon'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;checked=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'checked'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;label&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'r3'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;레몬&lt;span class=&quot;nt&quot;&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>김범주</name></author><category term="HTML" /><category term="tag" /><summary type="html">HTML TAG : Learning the HTML Source 내가 작업하면서 알게 된 것이나 유용한 HTML 관련 소스들을 정리하는 목적에 블로깅이며 계속 업데이트 할 것이다.</summary></entry><entry><title type="html">블로그 포스팅 소스 작성 요령</title><link href="http://localhost:4000/blogging/sample-source/" rel="alternate" type="text/html" title="블로그 포스팅 소스 작성 요령" /><published>2019-01-08T00:00:00+09:00</published><updated>2019-01-09T00:00:00+09:00</updated><id>http://localhost:4000/blogging/sample-source</id><content type="html" xml:base="http://localhost:4000/blogging/sample-source/">&lt;h1 id=&quot;abc--대제목&quot;&gt;abc : 대제목&lt;/h1&gt;
-&lt;h2 id=&quot;abc--중제목&quot;&gt;abc : 중제목&lt;/h2&gt;
-&lt;h3 id=&quot;abc--소제목&quot;&gt;abc : 소제목&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;abc : 굵게&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;abc&lt;/li&gt;
-  &lt;li&gt;def : 넘버링
-    &lt;ul&gt;
-      &lt;li&gt;abc : 목록
-&lt;br /&gt;
-&lt;img src=&quot;/assets/images/abc.png&quot; alt=&quot;ABC&quot; /&gt; : 이미지 삽입
-&lt;br /&gt;
-&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt;&lt;strong&gt;__&lt;/strong&gt; : 경계선&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;codeblock 예시&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;syntaxHighlight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello World'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>김범주</name></author><category term="markdown" /><summary type="html">abc : 대제목 abc : 중제목 abc : 소제목 abc : 굵게 abc def : 넘버링 abc : 목록 : 이미지 삽입 ______________________ : 경계선</summary></entry><entry><title type="html">[웹 에디터] 코드 미리보기, 코드삽입 사이트 codepen</title><link href="http://localhost:4000/editor/codepen/" rel="alternate" type="text/html" title="[웹 에디터] 코드 미리보기, 코드삽입 사이트 codepen" /><published>2019-01-08T00:00:00+09:00</published><updated>2019-01-08T00:00:00+09:00</updated><id>http://localhost:4000/editor/codepen</id><content type="html" xml:base="http://localhost:4000/editor/codepen/">&lt;h1 id=&quot;codepen--front-end-designer-playground&quot;&gt;codepen : Front-end designer playground&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>김범주</name></author><category term="HTML" /><category term="tag" /><summary type="html">HTML TAG : Learning the HTML Source 내가 작업하면서 알게 된 것이나 유용한 HTML 관련 소스들을 정리하는 목적에 블로깅이며 계속 업데이트 할 것이다.</summary></entry><entry><title type="html">[웹 에디터] 코드 미리보기, 코드삽입 사이트 codepen</title><link href="http://localhost:4000/editor/codepen/" rel="alternate" type="text/html" title="[웹 에디터] 코드 미리보기, 코드삽입 사이트 codepen" /><published>2019-01-08T00:00:00+09:00</published><updated>2019-01-08T00:00:00+09:00</updated><id>http://localhost:4000/editor/codepen</id><content type="html" xml:base="http://localhost:4000/editor/codepen/">&lt;h1 id=&quot;codepen--front-end-designer-playground&quot;&gt;codepen : Front-end designer playground&lt;/h1&gt;
 &lt;p&gt;작성한 HTML, CSS, JavaScript에 코드의 결과를 알려주는 웹사이트이다.
 또한 작업한 것을 자신의 블로그나 개인홈페이지에 삽입 할 수 있다.&lt;/p&gt;
 
